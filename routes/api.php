@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\NearbyController;
+use App\Http\Controllers\Api\SetupController;
 use App\Models\Banner;
 use App\Models\Batch;
 use App\Models\Branch;
@@ -24,6 +25,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
     Route::get('public/nearby-coachings', NearbyController::class)->middleware('throttle:60,1');
+
+    Route::post('setup/super-admin', [SetupController::class, 'createSuperAdmin'])->middleware('throttle:5,1');
 
     Route::post('auth/login', [AuthController::class, 'login'])->middleware('throttle:10,1');
 
